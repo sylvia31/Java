@@ -7,7 +7,7 @@ import java.util.HashMap;
 public class Mission extends Projet implements AffecterEmploye, AjoutMission{
 
     private int idM;
-    private static int id;
+    private static int id; //il faudrait pas l'initialiser à 0 ?
     private Date datedeb;
     private int duree;
     private int nbTotalPers;
@@ -19,6 +19,10 @@ public class Mission extends Projet implements AffecterEmploye, AjoutMission{
     };
     private statut etatMission;
     
+    //pourquoi c'est final ?
+    private final HashMap<Integer,Mission> touteslesMissions = new HashMap<Integer, Mission>();
+
+    //j'ai enlevé idM vu qu'on l'utilise pas
     public Mission(int idP, int duree, int nbTotalPers) {
         super(idP);
         this.duree = duree;
@@ -27,7 +31,7 @@ public class Mission extends Projet implements AffecterEmploye, AjoutMission{
         this.idM = Mission.id++;
     }
     public Mission(){
-        this.idM=Mission.id++;
+        this.idM = Mission.id ++;
     }
     
     
@@ -39,11 +43,11 @@ public class Mission extends Projet implements AffecterEmploye, AjoutMission{
         catch (Exception e){
             throw new Exception("La mission ne peut pas être créée");
         }
+    public void enrgMission(Mission m){
+        //if une nouvelle mission est créée
+        this.touteslesMissions.put(idM, m);
     }
     
-    
-    public void programmerMission (){
-        
     }
     
     public void defEtatMission(Date d){
@@ -55,9 +59,17 @@ public class Mission extends Projet implements AffecterEmploye, AjoutMission{
         else
             this.etatMission = statut.EnCours;
         
+    public void programmerMission() {
+
     }
     
     
+
+    /**
+     * Affecter un employé à une mission
+     *
+     * @param e
+     */
     public ArrayList affecter(ArrayList a, Employe e) {
         for (Employe emp : this.employesMission){
             if (!emp.equals(e))
@@ -66,6 +78,10 @@ public class Mission extends Projet implements AffecterEmploye, AjoutMission{
         return a;
     }
 
+    @Override
+    public ArrayList affecter(Employe e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 
 

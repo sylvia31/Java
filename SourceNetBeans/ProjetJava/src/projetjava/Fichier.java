@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package projetjava;
 
 import java.io.BufferedReader;
@@ -5,18 +10,24 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
+/**
+ *
+ * @author USER
+ */
 public class Fichier {
 
-    protected ArrayList<Employe> toutlePers = new ArrayList <Employe>();
-    protected ArrayList<String> touteslesComp = new ArrayList<String>();
+    protected ArrayList<Employe> touslesEmp;
+    protected ArrayList<Competence> touteslesComp = new ArrayList<Competence>();
 
+    public Fichier() {
+
+    }
     
     public void lectureComp() throws FileNotFoundException, IOException {
-        //Lecture de la liste des compÈtences
+        //Lecture de la liste des compétences
         Scanner sc3 = new Scanner(System.in);
         System.out.println("Donner le chemin d'accès du fichier contenant la liste des compétences :"); //C:\\Users\\USER\\Documents\\L3 MIAGE\\Semestre 2\\AOC\\ProjetJava\\fichiers\\liste_competences.csv
         String chemin3 = sc3.nextLine();
@@ -33,10 +44,10 @@ public class Fichier {
                     String mot3 = st3.nextToken();
                     String[] mots3 = s3.split(";");
                     for (int i = 0; i < mots3.length; i++) {
-                        /*System.out.println(mots3[i]);*/
-                        touteslesComp.add(mots3[i]);
+                        System.out.println(mots3[i]);
                         System.out.println(touteslesComp.toString());
                     }
+                    touteslesComp.add(new Competence(mots3[0], mots3[1], mots3[2]));
                     System.out.println(" ");
                 }
             }
@@ -60,15 +71,17 @@ public class Fichier {
                 while (st2.hasMoreTokens()) {
                     String mot2 = st2.nextToken();
                     String[] mots2 = s2.split(";");
+                    touslesEmp.add(new Employe(Integer.parseInt(mots2[3]), mots2[1]));
                     System.out.println(mots2[3] + " " + mots2[0] + " " + mots2[1] + " " + mots2[2]);
                     System.out.println(" ");
                 }
             }
         }
+        //System.out.println(touslesEmp.toString());
     }
 
     public void lectureEmpComp() throws FileNotFoundException, IOException {
-        //Lecture du fichier reliant les employÈs aux compÈtences
+        //Lecture du fichier reliant les employés aux compétences
         Scanner sc = new Scanner(System.in);
         System.out.println("Donner le chemin d'accès du fichier reliant les employés aux compétences :"); //C:\\Users\\USER\\Documents\\L3 MIAGE\\Semestre 2\\AOC\\ProjetJava\\fichiers\\competences_personnel.csv
         String chemin = sc.nextLine();
@@ -92,9 +105,23 @@ public class Fichier {
             }
         }
     }
-    
-    public void addEmp (Employe e){
-        this.toutlePers.add(e);
+
+    //tout ça va dans la classe Entreprise
+    /*public void ajoutPers(Employe p) {
+        this.touslesEmp.add(p);
     }
+
+    public void supprPers(Employe p) {
+        this.touslesEmp.remove(p);
+    }
+
+    public void ajoutComp(Competence c) {
+        this.touteslesComp.add(c);
+    }
+
+    public void supprComp(Competence c) {
+        this.touteslesComp.remove(c);
+    }*/
+    
     
 }

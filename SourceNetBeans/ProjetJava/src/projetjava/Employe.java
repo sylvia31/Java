@@ -9,6 +9,8 @@ public class Employe {
 
     public Employe(int idE, String nomEmp) {
         this.idE = idE;
+        //hola
+        
         this.nomEmp = nomEmp;
     }
 }

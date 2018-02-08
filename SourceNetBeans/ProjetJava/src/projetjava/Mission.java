@@ -31,15 +31,10 @@ public class Mission extends Projet implements AffecterEmploye, AjoutMission{
     }
     
     
-    public void enrgMission(Mission m) {
-        //if (creerMission())
-            this.toutesLesMissions.put(idM, m);
-    }
-    
     public void creerMission() throws Exception{
         try{
             Mission m = new Mission();
-            
+            this.toutesLesMissions.put(idM, m);
         }
         catch (Exception e){
             throw new Exception("La mission ne peut pas être créée");
@@ -51,9 +46,14 @@ public class Mission extends Projet implements AffecterEmploye, AjoutMission{
         
     }
     
-    public void verifMission(Date d){
-        if(this.datedeb+this.duree>d)
+    public void defEtatMission(Date d){
+        Date dateFin = new Date(this.datedeb.getTime()+this.duree*24*60*1000);
+        System.out.println(dateFin);
+        dateFin.compareTo(d);
+        if(dateFin.before(d))
             this.etatMission = statut.Terminée;
+        else
+            this.etatMission = statut.EnCours;
         
     }
     
